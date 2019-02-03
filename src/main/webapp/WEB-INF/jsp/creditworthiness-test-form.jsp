@@ -145,8 +145,11 @@
                                     <p class="lead m-0 mt-1 text-center"><b>installment type</b></p>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
-                                    <form:input path="installmentType" type="text"
-                                                class="form-control w-100 border-secondary border-0 text-center"/>
+                                    <form:select path="installmentType"
+                                                 class="form-control w-100 border-secondary border-0 text-center">
+                                        <option style="text-align-last:center;" value="equal">equal</option>
+                                        <option style="text-align-last:center;" value="decreasing">decreasing</option>
+                                    </form:select>
                                 </div>
                             </div>
                             <div class="row">
@@ -162,8 +165,7 @@
                                 </div>
                                 <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
                                     <form:input path="otherLoans" type="number" min="0" max="10000" step="1"
-                                                class="form-control w-100 border-secondary border-0 text-center"
-                                    />
+                                                class="form-control w-100 border-secondary border-0 text-center"/>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 bg-secondary text-light border rounded-left rounded-right">
                                     <p class="lead m-0 mt-1 text-center"><b>other liabilities</b></p>
@@ -202,32 +204,32 @@
                     </form:form>
                 </div>
 
-            <div class="col mb-2 px-0">
-                <c:if test="${success != null}">
-                    <div class="text-center px-5 mt-5 mb-0" role="alert">
-                        <div class="container">
-                            <h3>Net Income: <fmt:formatNumber value="${netIncome}" type="currency"
-                                                              currencySymbol="PLN"/></h3>
-                            <h3>Max Credit: <fmt:formatNumber value="${maxCredit}" type="currency"
-                                                              currencySymbol="PLN"/></h3>
-                            <h3>Max Payment:<fmt:formatNumber value="${pmt}" type="currency"
-                                                              currencySymbol="PLN"/></h3>
+                <div class="col mb-2 px-0">
+                    <c:if test="${success != null}">
+                        <div class="text-center px-5 mt-5 mb-0" role="alert">
+                            <div class="container">
+                                <h3>Net Income: <fmt:formatNumber value="${netIncome}" type="currency"
+                                                                  currencySymbol="PLN"/></h3>
+                                <h3>Max Credit: <fmt:formatNumber value="${maxCredit}" type="currency"
+                                                                  currencySymbol="PLN"/></h3>
+                                <h3>Max Payment:<fmt:formatNumber value="${pmt}" type="currency"
+                                                                  currencySymbol="PLN"/></h3>
+                            </div>
                         </div>
-                    </div>
-                </c:if>
-                <c:if test="${error != null}">
-                    <div class="alert alert-danger text-white text-center px-5 mt-5 mb-0" role="alert">
-                        <div class="container">
-                            <i class="now-ui-icons objects_support-17 lg pull-left mr-3"></i>
-                            <strong>ERROR!</strong>
-                            <span> ${error}</span>
-                            <button type="button" class="close text-white" data-dismiss="alert">
-                                <i class="now-ui-icons ui-1_simple-remove"></i>
-                            </button>
+                    </c:if>
+                    <c:if test="${error != null}">
+                        <div class="alert alert-danger text-white text-center px-5 mt-5 mb-0" role="alert">
+                            <div class="container">
+                                <i class="now-ui-icons objects_support-17 lg pull-left mr-3"></i>
+                                <strong>ERROR!</strong>
+                                <span> ${error}</span>
+                                <button type="button" class="close text-white" data-dismiss="alert">
+                                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </c:if>
-            </div>
+                    </c:if>
+                </div>
             </div>
         </div>
 

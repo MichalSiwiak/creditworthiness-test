@@ -17,7 +17,12 @@ public class Creditworthiness {
 
     // calculation for net income
     public double calculateNetIncome() {
-        return monthlyIncome - otherLiabilities - otherLoans - ((creditLimits * 0.035) / 12) - (dependents * 1000);
+        if (installmentType.equals("equal")) {
+            return monthlyIncome - otherLiabilities - otherLoans - ((creditLimits * 0.035) / 12) - (dependents * 1000);
+        } else {
+            return 0.7 * (monthlyIncome - otherLiabilities - otherLoans - ((creditLimits * 0.035) / 12) - (dependents * 1000));
+        }
+
     }
 
     // calculation for max credit
