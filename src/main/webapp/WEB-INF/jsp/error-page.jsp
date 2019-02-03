@@ -61,7 +61,8 @@
                         </a>
                         </li>
                         <li class="nav-item mx-1 align-items-center d-flex justify-content-center">
-                            <a class="nav-link" target="_blank" href="https://coffeecoding.net/resources/img/cv_msiwiak.pdf">
+                            <a class="nav-link" target="_blank"
+                               href="https://coffeecoding.net/resources/img/cv_msiwiak.pdf">
                                 <text class="">RESUME</text>
                             </a>
                         </li>
@@ -93,9 +94,10 @@
                 <br>
                 <br>
                 <br>
-                <img class="img-fluid m-0 mt-5 pt-5" alt="..." src="https://coffeecoding.net/resources/img/404-page.png">
+                <img class="img-fluid m-0 mt-5 pt-5" alt="..."
+                     src="https://coffeecoding.net/resources/img/404-page.png">
                 <h1 class="text-center">Page Not Found (404)</h1>
-                <h3 class="display-1 p-0 m-0" >The rabbits have been nibbling the cables again ...</h3>
+                <h3 class="display-1 p-0 m-0">The rabbits have been nibbling the cables again ...</h3>
                 <h3 class="display-1 p-0 m-0">Maybe this will go <a href="https://coffeecoding.net/">HOME</a></h3>
             </div>
         </div>

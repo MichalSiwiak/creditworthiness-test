@@ -127,24 +127,26 @@
                                     <p class="lead m-0 mt-1 text-center"><b>payment period</b></p>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
-                                    <form:input path="paymentPeriod"  type="number" min="12" max="360" value="120" step="1"
-                                           class="form-control w-100 border-secondary border-0 text-center"
-                                           required="required"/>
+                                    <form:input path="paymentPeriod" type="number" min="12" max="360" value="120"
+                                                step="1"
+                                                class="form-control w-100 border-secondary border-0 text-center"
+                                                required="required"/>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 bg-secondary text-light border rounded-left rounded-right">
                                     <p class="lead m-0 mt-1 text-center"><b>interest</b></p>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
                                     <form:input path="interest" type="number" value="3.5" min="1" max="20"
-                                           step="0.01" class="form-control w-100 border-secondary border-0 text-center"
-                                           required="required"/>
+                                                step="0.01"
+                                                class="form-control w-100 border-secondary border-0 text-center"
+                                                required="required"/>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 bg-secondary text-light border rounded-left rounded-right">
                                     <p class="lead m-0 mt-1 text-center"><b>installment type</b></p>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
-                                    <form:input path="installmentType" type="text" class="form-control w-100 border-secondary border-0"
-                                           required="required"/>
+                                    <form:input path="installmentType" type="text"
+                                                class="form-control w-100 border-secondary border-0 text-center"/>
                                 </div>
                             </div>
                             <div class="row">
@@ -152,25 +154,24 @@
                                     <p class="lead m-0 mt-1 text-center"><b>credit limits</b></p>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
-                                    <form:input path="creditLimits" min="0" max="100000" value="0" step="1"
-                                           class="form-control w-100 border-secondary border-0 text-center"
-                                           required="required"/>
+                                    <form:input path="creditLimits" type="number" min="0" max="100000" step="1"
+                                                class="form-control w-100 border-secondary border-0 text-center"/>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 bg-secondary text-light border rounded-left rounded-right">
                                     <p class="lead m-0 mt-1 text-center"><b>other loans</b></p>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
-                                    <form:input path="otherLoans" type="number" min="0" max="10000" value="0" step="1"
-                                           class="form-control w-100 border-secondary border-0 text-center"
-                                           required="required"/>
+                                    <form:input path="otherLoans" type="number" min="0" max="10000" step="1"
+                                                class="form-control w-100 border-secondary border-0 text-center"
+                                    />
                                 </div>
                                 <div class="col-md-2 m-0 p-0 bg-secondary text-light border rounded-left rounded-right">
                                     <p class="lead m-0 mt-1 text-center"><b>other liabilities</b></p>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
-                                    <form:input path="otherLiabilities" type="number" min="0" max="10000" value="0" step="1"
-                                           class="form-control w-100 border-secondary border-0 text-center"
-                                           required="required"/>
+                                    <form:input path="otherLiabilities" type="number" min="0" max="10000"
+                                                step="1"
+                                                class="form-control w-100 border-secondary border-0 text-center"/>
                                 </div>
                             </div>
                             <div class="row">
@@ -178,17 +179,17 @@
                                     <p class="lead m-0 mt-1 text-center"><b>monthly income</b></p>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
-                                    <form:input path="monthlyIncome" type="number" min="1000" max="100000" value="5000" step="1"
-                                           class="form-control w-100 border-secondary border-0 text-center"
-                                           required="required"/>
+                                    <form:input path="monthlyIncome" type="number" min="1000" max="100000" value="5000"
+                                                step="1"
+                                                class="form-control w-100 border-secondary border-0 text-center"
+                                                required="required"/>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 bg-secondary text-light border rounded-left rounded-right">
                                     <p class="m-0 mt-1 text-center lead"><b>dependents</b></p>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
-                                    <form:input path="dependents" type="number" min="0" max="100000" value="0" step="1"
-                                           class="form-control w-100 border-secondary border-0 text-center"
-                                           required="required"/>
+                                    <form:input path="dependents" type="number" min="0" max="20" step="1"
+                                                class="form-control w-100 border-secondary border-0 text-center"/>
                                 </div>
                                 <div class="m-0 p-0 col-md-4 w-25">
                                     <button class="btn w-100 mt-0 mb-0 btn-warning text-dark" type="submit">calculate
@@ -199,15 +200,42 @@
                             </div>
                         </div>
                     </form:form>
-
-
                 </div>
+
+            <div class="col mb-2 px-0">
+                <c:if test="${success != null}">
+                    <div class="text-center px-5 mt-5 mb-0" role="alert">
+                        <div class="container">
+                            <h3>Net Income: <fmt:formatNumber value="${netIncome}" type="currency"
+                                                              currencySymbol="PLN"/></h3>
+                            <h3>Max Credit: <fmt:formatNumber value="${maxCredit}" type="currency"
+                                                              currencySymbol="PLN"/></h3>
+                            <h3>Max Payment:<fmt:formatNumber value="${pmt}" type="currency"
+                                                              currencySymbol="PLN"/></h3>
+                        </div>
+                    </div>
+                </c:if>
+                <c:if test="${error != null}">
+                    <div class="alert alert-danger text-white text-center px-5 mt-5 mb-0" role="alert">
+                        <div class="container">
+                            <i class="now-ui-icons objects_support-17 lg pull-left mr-3"></i>
+                            <strong>ERROR!</strong>
+                            <span> ${error}</span>
+                            <button type="button" class="close text-white" data-dismiss="alert">
+                                <i class="now-ui-icons ui-1_simple-remove"></i>
+                            </button>
+                        </div>
+                    </div>
+                </c:if>
+            </div>
             </div>
         </div>
 
 
     </div>
 </div>
+
+
 <footer class="footer bg-dark text-muted">
     <div class="container">
         <p class="float-right">

@@ -26,9 +26,19 @@ public class AppController {
     }
 
     @PostMapping("/demo")
-    public String calculateCreditworthiness(@ModelAttribute("creditworthiness") Creditworthiness creditworthiness) {
+    public String calculateCreditworthiness(@ModelAttribute("creditworthiness") Creditworthiness creditworthiness, Model model) {
 
-        System.out.println(creditworthiness.toString());
+
+        if (creditworthiness.calculateNetIncome() <= 0) {
+            model.addAttribute("error", "No creditworthiness");
+
+        } else {
+            model.addAttribute("success", "success");
+            model.addAttribute("netIncome", roundDouble2precision(creditworthiness.calculateNetIncome(), 2));
+            model.addAttribute("maxCredit", roundDouble2precision(creditworthiness.calculateMaxCredit(), 2));
+            model.addAttribute("pmt", roundDouble2precision(creditworthiness.calculatePmt(), 2));
+        }
+
 
         return "creditworthiness-test-form";
     }

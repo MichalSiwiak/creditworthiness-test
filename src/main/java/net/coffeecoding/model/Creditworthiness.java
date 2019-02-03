@@ -2,28 +2,69 @@ package net.coffeecoding.model;
 
 public class Creditworthiness {
 
-
+    //required data
+    private double monthlyIncome;
     private int paymentPeriod;
     private double interest;
+
+    //additional data
     private String installmentType;
-    private int creditLimits;
-    private int otherLoans;
-    private int otherLiabilities;
-    private int monthlyIncome;
-    private int dependents;
+    private double creditLimits;
+    private double otherLoans;
+    private double otherLiabilities;
+    private double dependents;
+
+
+    // calculation for net income
+    public double calculateNetIncome() {
+        return monthlyIncome - otherLiabilities - otherLoans - ((creditLimits * 0.035) / 12) - (dependents * 1000);
+    }
+
+    // calculation for max credit
+    public double calculateMaxCredit() {
+
+        //loan repaid monthly so the rate must be divided by 12 and 100
+        double monthlyInterestRate = interest / 1200;
+        double dividendMaxCredit = (Math.pow(1 + monthlyInterestRate, paymentPeriod) - 1) * calculateNetIncome();
+        double divisorMaxCredit = monthlyInterestRate * Math.pow(1 + monthlyInterestRate, paymentPeriod);
+        if (calculateNetIncome() <= 0)
+            return 0;
+        else
+            return dividendMaxCredit / divisorMaxCredit;
+    }
+
+    // calculation for payment credit
+    public double calculatePmt() {
+        //loan repaid monthly so the rate must be divided by 12 and 100
+        double monthlyInterestRate = interest / 1200;
+        double dividendPmt = monthlyInterestRate * Math.pow(1 + monthlyInterestRate, paymentPeriod) * calculateMaxCredit();
+        double divisorPmt = Math.pow(1 + monthlyInterestRate, paymentPeriod) - 1;
+        if (calculateNetIncome() <= 0)
+            return 0;
+        else
+            return dividendPmt / divisorPmt;
+    }
 
     @Override
     public String toString() {
         return "Creditworthiness{" +
-                "paymentPeriod=" + paymentPeriod +
+                "monthlyIncome=" + monthlyIncome +
+                ", paymentPeriod=" + paymentPeriod +
                 ", interest=" + interest +
                 ", installmentType='" + installmentType + '\'' +
                 ", creditLimits=" + creditLimits +
                 ", otherLoans=" + otherLoans +
                 ", otherLiabilities=" + otherLiabilities +
-                ", monthlyIncome=" + monthlyIncome +
                 ", dependents=" + dependents +
                 '}';
+    }
+
+    public double getMonthlyIncome() {
+        return monthlyIncome;
+    }
+
+    public void setMonthlyIncome(double monthlyIncome) {
+        this.monthlyIncome = monthlyIncome;
     }
 
     public int getPaymentPeriod() {
@@ -50,43 +91,35 @@ public class Creditworthiness {
         this.installmentType = installmentType;
     }
 
-    public int getCreditLimits() {
+    public double getCreditLimits() {
         return creditLimits;
     }
 
-    public void setCreditLimits(int creditLimits) {
+    public void setCreditLimits(double creditLimits) {
         this.creditLimits = creditLimits;
     }
 
-    public int getOtherLoans() {
+    public double getOtherLoans() {
         return otherLoans;
     }
 
-    public void setOtherLoans(int otherLoans) {
+    public void setOtherLoans(double otherLoans) {
         this.otherLoans = otherLoans;
     }
 
-    public int getOtherLiabilities() {
+    public double getOtherLiabilities() {
         return otherLiabilities;
     }
 
-    public void setOtherLiabilities(int otherLiabilities) {
+    public void setOtherLiabilities(double otherLiabilities) {
         this.otherLiabilities = otherLiabilities;
     }
 
-    public int getMonthlyIncome() {
-        return monthlyIncome;
-    }
-
-    public void setMonthlyIncome(int monthlyIncome) {
-        this.monthlyIncome = monthlyIncome;
-    }
-
-    public int getDependents() {
+    public double getDependents() {
         return dependents;
     }
 
-    public void setDependents(int dependents) {
+    public void setDependents(double dependents) {
         this.dependents = dependents;
     }
 }
