@@ -118,9 +118,90 @@
 
         <div class="py-5">
             <div class="container">
-                <h2>Project Description</h2>
+                <h2>Calculate Your Creditworthiness:</h2>
+                <div class="row my-5">
+                    <form:form modelAttribute="creditworthiness" method="POST" class="col-md-12">
+                        <div>
+                            <div class="row">
+                                <div class="col-md-2 m-0 p-0 bg-secondary text-light border rounded-left rounded-right">
+                                    <p class="lead m-0 mt-1 text-center"><b>payment period</b></p>
+                                </div>
+                                <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
+                                    <form:input path="paymentPeriod"  type="number" min="12" max="360" value="120" step="1"
+                                           class="form-control w-100 border-secondary border-0 text-center"
+                                           required="required"/>
+                                </div>
+                                <div class="col-md-2 m-0 p-0 bg-secondary text-light border rounded-left rounded-right">
+                                    <p class="lead m-0 mt-1 text-center"><b>interest</b></p>
+                                </div>
+                                <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
+                                    <form:input path="interest" type="number" value="3.5" min="1" max="20"
+                                           step="0.01" class="form-control w-100 border-secondary border-0 text-center"
+                                           required="required"/>
+                                </div>
+                                <div class="col-md-2 m-0 p-0 bg-secondary text-light border rounded-left rounded-right">
+                                    <p class="lead m-0 mt-1 text-center"><b>installment type</b></p>
+                                </div>
+                                <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
+                                    <form:input path="installmentType" type="text" class="form-control w-100 border-secondary border-0"
+                                           required="required"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 m-0 p-0 bg-secondary text-light border rounded-left rounded-right">
+                                    <p class="lead m-0 mt-1 text-center"><b>credit limits</b></p>
+                                </div>
+                                <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
+                                    <form:input path="creditLimits" min="0" max="100000" value="0" step="1"
+                                           class="form-control w-100 border-secondary border-0 text-center"
+                                           required="required"/>
+                                </div>
+                                <div class="col-md-2 m-0 p-0 bg-secondary text-light border rounded-left rounded-right">
+                                    <p class="lead m-0 mt-1 text-center"><b>other loans</b></p>
+                                </div>
+                                <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
+                                    <form:input path="otherLoans" type="number" min="0" max="10000" value="0" step="1"
+                                           class="form-control w-100 border-secondary border-0 text-center"
+                                           required="required"/>
+                                </div>
+                                <div class="col-md-2 m-0 p-0 bg-secondary text-light border rounded-left rounded-right">
+                                    <p class="lead m-0 mt-1 text-center"><b>other liabilities</b></p>
+                                </div>
+                                <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
+                                    <form:input path="otherLiabilities" type="number" min="0" max="10000" value="0" step="1"
+                                           class="form-control w-100 border-secondary border-0 text-center"
+                                           required="required"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 m-0 p-0 bg-secondary text-light border rounded-left rounded-right">
+                                    <p class="lead m-0 mt-1 text-center"><b>monthly income</b></p>
+                                </div>
+                                <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
+                                    <form:input path="monthlyIncome" type="number" min="1000" max="100000" value="5000" step="1"
+                                           class="form-control w-100 border-secondary border-0 text-center"
+                                           required="required"/>
+                                </div>
+                                <div class="col-md-2 m-0 p-0 bg-secondary text-light border rounded-left rounded-right">
+                                    <p class="m-0 mt-1 text-center lead"><b>dependents</b></p>
+                                </div>
+                                <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
+                                    <form:input path="dependents" type="number" min="0" max="100000" value="0" step="1"
+                                           class="form-control w-100 border-secondary border-0 text-center"
+                                           required="required"/>
+                                </div>
+                                <div class="m-0 p-0 col-md-4 w-25">
+                                    <button class="btn w-100 mt-0 mb-0 btn-warning text-dark" type="submit">calculate
+                                        your
+                                        creditworthiness
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form:form>
 
 
+                </div>
             </div>
         </div>
 

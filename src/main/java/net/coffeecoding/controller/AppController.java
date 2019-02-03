@@ -1,6 +1,8 @@
 package net.coffeecoding.controller;
 
+import net.coffeecoding.model.Creditworthiness;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -15,7 +17,18 @@ public class AppController {
     }
 
     @GetMapping("/demo")
-    public String getDemo() {
+    public String showDemoPage(Model model) {
+
+        Creditworthiness creditworthiness = new Creditworthiness();
+        model.addAttribute("creditworthiness", creditworthiness);
+
+        return "creditworthiness-test-form";
+    }
+
+    @PostMapping("/demo")
+    public String calculateCreditworthiness(@ModelAttribute("creditworthiness") Creditworthiness creditworthiness) {
+
+        System.out.println(creditworthiness.toString());
 
         return "creditworthiness-test-form";
     }
