@@ -19,7 +19,13 @@ public class AppController {
     @GetMapping("/demo")
     public String showDemoPage(Model model) {
 
-        Creditworthiness creditworthiness = new Creditworthiness();
+        //default value
+        Creditworthiness creditworthiness = new Creditworthiness.CreditBuilder()
+                .withMonthlyIncome(5000)
+                .withInterest(3.5)
+                .withPaymentPeriod(12)
+                .build();
+
         model.addAttribute("creditworthiness", creditworthiness);
 
         return "creditworthiness-test-form";

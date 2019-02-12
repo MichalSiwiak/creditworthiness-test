@@ -127,8 +127,7 @@
                                     <p class="lead m-0 mt-1 text-center"><b>payment period</b></p>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
-                                    <form:input path="paymentPeriod" type="number" min="12" max="360" value="120"
-                                                step="1"
+                                    <form:input path="paymentPeriod" type="number" min="12" max="360" step="1"
                                                 class="form-control w-100 border-secondary border-0 text-center"
                                                 required="required"/>
                                 </div>
@@ -136,8 +135,7 @@
                                     <p class="lead m-0 mt-1 text-center"><b>interest</b></p>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
-                                    <form:input path="interest" type="number" value="3.5" min="1" max="20"
-                                                step="0.01"
+                                    <form:input path="interest" type="number" min="1" max="20" step="0.01"
                                                 class="form-control w-100 border-secondary border-0 text-center"
                                                 required="required"/>
                                 </div>
@@ -181,8 +179,7 @@
                                     <p class="lead m-0 mt-1 text-center"><b>monthly income</b></p>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
-                                    <form:input path="monthlyIncome" type="number" min="1000" max="100000" value="5000"
-                                                step="1"
+                                    <form:input path="monthlyIncome" type="number" min="1000" max="100000" step="1"
                                                 class="form-control w-100 border-secondary border-0 text-center"
                                                 required="required"/>
                                 </div>

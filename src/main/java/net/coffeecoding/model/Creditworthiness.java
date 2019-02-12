@@ -6,7 +6,6 @@ public class Creditworthiness {
     private double monthlyIncome;
     private int paymentPeriod;
     private double interest;
-
     //additional data
     private String installmentType;
     private double creditLimits;
@@ -14,6 +13,19 @@ public class Creditworthiness {
     private double otherLiabilities;
     private double dependents;
 
+    private Creditworthiness(final CreditBuilder creditBuilder) {
+        this.monthlyIncome = creditBuilder.monthlyIncome;
+        this.paymentPeriod = creditBuilder.paymentPeriod;
+        this.interest = creditBuilder.interest;
+        this.installmentType = creditBuilder.installmentType;
+        this.creditLimits = creditBuilder.creditLimits;
+        this.otherLoans = creditBuilder.otherLoans;
+        this.otherLiabilities = creditBuilder.otherLiabilities;
+        this.dependents = creditBuilder.dependents;
+    }
+
+    public Creditworthiness() {
+    }
 
     // calculation for net income
     public double calculateNetIncome() {
@@ -48,20 +60,6 @@ public class Creditworthiness {
             return 0;
         else
             return dividendPmt / divisorPmt;
-    }
-
-    @Override
-    public String toString() {
-        return "Creditworthiness{" +
-                "monthlyIncome=" + monthlyIncome +
-                ", paymentPeriod=" + paymentPeriod +
-                ", interest=" + interest +
-                ", installmentType='" + installmentType + '\'' +
-                ", creditLimits=" + creditLimits +
-                ", otherLoans=" + otherLoans +
-                ", otherLiabilities=" + otherLiabilities +
-                ", dependents=" + dependents +
-                '}';
     }
 
     public double getMonthlyIncome() {
@@ -126,5 +124,78 @@ public class Creditworthiness {
 
     public void setDependents(double dependents) {
         this.dependents = dependents;
+    }
+
+    @Override
+    public String toString() {
+        return "Creditworthiness{" +
+                "monthlyIncome=" + monthlyIncome +
+                ", paymentPeriod=" + paymentPeriod +
+                ", interest=" + interest +
+                ", installmentType='" + installmentType + '\'' +
+                ", creditLimits=" + creditLimits +
+                ", otherLoans=" + otherLoans +
+                ", otherLiabilities=" + otherLiabilities +
+                ", dependents=" + dependents +
+                '}';
+    }
+
+    public static class CreditBuilder {
+        //required data
+        private double monthlyIncome;
+        private int paymentPeriod;
+        private double interest;
+        //additional data
+        private String installmentType;
+        private double creditLimits;
+        private double otherLoans;
+        private double otherLiabilities;
+        private double dependents;
+
+        public Creditworthiness build() {
+            return new Creditworthiness(this);
+        }
+
+
+        public CreditBuilder withMonthlyIncome(double monthlyIncome) {
+            this.monthlyIncome = monthlyIncome;
+            return this;
+        }
+
+        public CreditBuilder withPaymentPeriod(int paymentPeriod) {
+            this.paymentPeriod = paymentPeriod;
+            return this;
+        }
+
+        public CreditBuilder withInterest(double interest) {
+            this.interest = interest;
+            return this;
+        }
+
+        public CreditBuilder withInstallmentType(String installmentType) {
+            this.installmentType = installmentType;
+            return this;
+        }
+
+        public CreditBuilder withCreditLimits(double creditLimits) {
+            this.creditLimits = creditLimits;
+            return this;
+        }
+
+        public CreditBuilder withOtherLoans(double otherLoans) {
+            this.otherLoans = otherLoans;
+            return this;
+        }
+
+        public CreditBuilder withOtherLiabilities(double otherLiabilities) {
+            this.otherLiabilities = otherLiabilities;
+            return this;
+        }
+
+        public CreditBuilder withDependents(double dependents) {
+            this.dependents = dependents;
+            return this;
+        }
+
     }
 }
