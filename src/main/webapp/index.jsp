@@ -123,7 +123,7 @@
                             </ul>
                         </h5>
                         <h5>The application calculates the maximum loan amount based on the above data and the maximum
-                            installment of the customer, using the formula:</h5>
+                            installment of the customer, using the annuity formula: <a href="https://en.wikipedia.org/wiki/Annuity" target="_blank">(source here from wiki)</a> </h5>
 
 
                         <h5><img
