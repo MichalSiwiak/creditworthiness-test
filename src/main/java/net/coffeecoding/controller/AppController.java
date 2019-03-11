@@ -34,6 +34,9 @@ public class AppController {
     @PostMapping("/demo")
     public String calculateCreditworthiness(@ModelAttribute("creditworthiness") Creditworthiness creditworthiness, Model model) {
 
+
+        System.out.println(creditworthiness.toString());
+
         if (creditworthiness.calculateNetIncome() <= 0) {
             model.addAttribute("error", "No creditworthiness");
 

@@ -81,9 +81,9 @@
                     CODE
                 </text>
                 </a>
-                <a href="${pageContext.request.contextPath}" class="navbar-brand d-flex align-items-center"><i
-                        class="fa fa-file-text fa-2x fa-fw lead d-inline-block" aria-hidden="true"></i>&nbsp;&nbsp;<text
-                        class="">DESCRIPTION
+                <a href="${pageContext.request.contextPath}/demo" class="navbar-brand d-flex align-items-center"><i
+                        class="fa fa-desktop fa-2x fa-fw lead d-inline-block" aria-hidden="true"></i>&nbsp;&nbsp;<text
+                        class="">DEMO VIEW
                 </text>
                 </a>
                 <a href="https://coffeecoding.net/resources/img/cv_msiwiak.pdf" target="_blank"
@@ -103,24 +103,328 @@
         </div>
 
 
-        <div class="text-center py-4 bg-secondary"
-             style="	background-image: linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.9));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-0">
-                        <h1 class="text-left text-primary">Creditworthiness Test</h1>
-                        <p class="lead text-left">Creditworthiness test using the reverse PMT function</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
         <div class="py-5">
             <div class="container">
-                <h2>Project Description</h2>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Creditworthiness Test</h1>
+                        <hr>
+                        <h5>The application calculates the creditworthiness of the client based on data:</h5>
+                        <h5>
+                            <ul>
+                                <li>payment period</li>
+                                <li>interest</li>
+                                <li>installment type</li>
+                                <li>credit limits</li>
+                                <li>other loans</li>
+                                <li>other liabilities</li>
+                                <li>monthly income</li>
+                                <li>number of dependents</li>
+                            </ul>
+                        </h5>
+                        <h5>The application calculates the maximum loan amount based on the above data and the maximum
+                            installment of the customer, using the formula:</h5>
 
 
+                        <h5><img
+                                src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6d10492db486b9289df62d8cd7df6199a211dcaf">
+                            <br><br>where
+                            <br>
+                            <br>R = installment payment
+                            <br>K = amount of credit
+                            <br>p = loan interest rate (for one period n)
+                            <br>n = number of installments
+                        </h5>
+
+                        <h5>From the above formula we calculate K and a R value is treated as free funds that we can
+                            transfer to a loan (income minus all expenses).</h5>
+
+                        <h5><b>Back End: </b>Java, Spring MVC.</h5>
+                        <h5><b>Front End: </b>HTML, CSS, JSP.</h5>
+                        <h5>To run application: git clone
+                            https://github.com/MichalSiwiak/creditworthiness-test.git,
+                            upload and run application using tomcat application server or similar.</h5>
+                        <h5>Demo View: <a href="https://www.coffeecoding.net/creditworthiness/demo">https://www.coffeecoding.net/creditworthiness/demo</a>
+                        </h5>
+
+                    </div>
+                </div>
+                <h5>Model class:</h5>
+                <pre><code class="java">
+  package net.coffeecoding.model;
+
+public class Creditworthiness {
+
+    //required data
+    private double monthlyIncome;
+    private int paymentPeriod;
+    private double interest;
+    //additional data
+    private String installmentType;
+    private double creditLimits;
+    private double otherLoans;
+    private double otherLiabilities;
+    private double dependents;
+
+    private Creditworthiness(final CreditBuilder creditBuilder) {
+        this.monthlyIncome = creditBuilder.monthlyIncome;
+        this.paymentPeriod = creditBuilder.paymentPeriod;
+        this.interest = creditBuilder.interest;
+        this.installmentType = creditBuilder.installmentType;
+        this.creditLimits = creditBuilder.creditLimits;
+        this.otherLoans = creditBuilder.otherLoans;
+        this.otherLiabilities = creditBuilder.otherLiabilities;
+        this.dependents = creditBuilder.dependents;
+    }
+
+    public Creditworthiness() {
+    }
+
+    // calculation for net income
+    public double calculateNetIncome() {
+        if (installmentType.equals("equal")) {
+            return monthlyIncome - otherLiabilities - otherLoans - ((creditLimits * 0.035) / 12) - (dependents * 1000);
+        } else {
+            return 0.7 * (monthlyIncome - otherLiabilities - otherLoans - ((creditLimits * 0.035) / 12) - (dependents * 1000));
+        }
+
+    }
+
+    // calculation for max credit
+    public double calculateMaxCredit() {
+
+        //loan repaid monthly so the rate must be divided by 12 and 100
+        double monthlyInterestRate = interest / 1200;
+        double dividendMaxCredit = (Math.pow(1 + monthlyInterestRate, paymentPeriod) - 1) * calculateNetIncome();
+        double divisorMaxCredit = monthlyInterestRate * Math.pow(1 + monthlyInterestRate, paymentPeriod);
+        if (calculateNetIncome() <= 0)
+            return 0;
+        else
+            return dividendMaxCredit / divisorMaxCredit;
+    }
+
+    // calculation for payment credit
+    public double calculatePmt() {
+        //loan repaid monthly so the rate must be divided by 12 and 100
+        double monthlyInterestRate = interest / 1200;
+        double dividendPmt = monthlyInterestRate * Math.pow(1 + monthlyInterestRate, paymentPeriod) * calculateMaxCredit();
+        double divisorPmt = Math.pow(1 + monthlyInterestRate, paymentPeriod) - 1;
+        if (calculateNetIncome() <= 0)
+            return 0;
+        else
+            return dividendPmt / divisorPmt;
+    }
+
+    public double getMonthlyIncome() {
+        return monthlyIncome;
+    }
+
+    public void setMonthlyIncome(double monthlyIncome) {
+        this.monthlyIncome = monthlyIncome;
+    }
+
+    public int getPaymentPeriod() {
+        return paymentPeriod;
+    }
+
+    public void setPaymentPeriod(int paymentPeriod) {
+        this.paymentPeriod = paymentPeriod;
+    }
+
+    public double getInterest() {
+        return interest;
+    }
+
+    public void setInterest(double interest) {
+        this.interest = interest;
+    }
+
+    public String getInstallmentType() {
+        return installmentType;
+    }
+
+    public void setInstallmentType(String installmentType) {
+        this.installmentType = installmentType;
+    }
+
+    public double getCreditLimits() {
+        return creditLimits;
+    }
+
+    public void setCreditLimits(double creditLimits) {
+        this.creditLimits = creditLimits;
+    }
+
+    public double getOtherLoans() {
+        return otherLoans;
+    }
+
+    public void setOtherLoans(double otherLoans) {
+        this.otherLoans = otherLoans;
+    }
+
+    public double getOtherLiabilities() {
+        return otherLiabilities;
+    }
+
+    public void setOtherLiabilities(double otherLiabilities) {
+        this.otherLiabilities = otherLiabilities;
+    }
+
+    public double getDependents() {
+        return dependents;
+    }
+
+    public void setDependents(double dependents) {
+        this.dependents = dependents;
+    }
+
+    @Override
+    public String toString() {
+        return "Creditworthiness{" +
+                "monthlyIncome=" + monthlyIncome +
+                ", paymentPeriod=" + paymentPeriod +
+                ", interest=" + interest +
+                ", installmentType='" + installmentType + '\'' +
+                ", creditLimits=" + creditLimits +
+                ", otherLoans=" + otherLoans +
+                ", otherLiabilities=" + otherLiabilities +
+                ", dependents=" + dependents +
+                '}';
+    }
+
+    public static class CreditBuilder {
+        //required data
+        private double monthlyIncome;
+        private int paymentPeriod;
+        private double interest;
+        //additional data
+        private String installmentType;
+        private double creditLimits;
+        private double otherLoans;
+        private double otherLiabilities;
+        private double dependents;
+
+        public Creditworthiness build() {
+            return new Creditworthiness(this);
+        }
+
+
+        public CreditBuilder withMonthlyIncome(double monthlyIncome) {
+            this.monthlyIncome = monthlyIncome;
+            return this;
+        }
+
+        public CreditBuilder withPaymentPeriod(int paymentPeriod) {
+            this.paymentPeriod = paymentPeriod;
+            return this;
+        }
+
+        public CreditBuilder withInterest(double interest) {
+            this.interest = interest;
+            return this;
+        }
+
+        public CreditBuilder withInstallmentType(String installmentType) {
+            this.installmentType = installmentType;
+            return this;
+        }
+
+        public CreditBuilder withCreditLimits(double creditLimits) {
+            this.creditLimits = creditLimits;
+            return this;
+        }
+
+        public CreditBuilder withOtherLoans(double otherLoans) {
+            this.otherLoans = otherLoans;
+            return this;
+        }
+
+        public CreditBuilder withOtherLiabilities(double otherLiabilities) {
+            this.otherLiabilities = otherLiabilities;
+            return this;
+        }
+
+        public CreditBuilder withDependents(double dependents) {
+            this.dependents = dependents;
+            return this;
+        }
+
+    }
+}
+</code></pre>
+                <br>
+                <h5>Controller class:</h5>
+                <pre><code class="java">
+package net.coffeecoding.controller;
+
+import net.coffeecoding.model.Creditworthiness;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+
+@Controller
+public class AppController {
+
+
+    @GetMapping("/error")
+    public String showErrorPage() {
+
+        return "error-page";
+    }
+
+    @GetMapping("/demo")
+    public String showDemoPage(Model model) {
+
+        //default value
+        Creditworthiness creditworthiness = new Creditworthiness.CreditBuilder()
+                .withMonthlyIncome(5000)
+                .withInterest(3.5)
+                .withPaymentPeriod(12)
+                .build();
+
+        model.addAttribute("creditworthiness", creditworthiness);
+
+        return "creditworthiness-test-form";
+    }
+
+    @PostMapping("/demo")
+    public String calculateCreditworthiness(@ModelAttribute("creditworthiness") Creditworthiness creditworthiness, Model model) {
+
+
+        System.out.println(creditworthiness.toString());
+
+        if (creditworthiness.calculateNetIncome() <= 0) {
+            model.addAttribute("error", "No creditworthiness");
+
+        } else {
+            model.addAttribute("success", "success");
+            model.addAttribute("netIncome", roundDouble2precision(creditworthiness.calculateNetIncome(), 2));
+            model.addAttribute("maxCredit", roundDouble2precision(creditworthiness.calculateMaxCredit(), 2));
+            model.addAttribute("pmt", roundDouble2precision(creditworthiness.calculatePmt(), 2));
+        }
+
+
+        return "creditworthiness-test-form";
+    }
+
+
+    public double roundDouble2precision(double value, int places) {
+        if (places < 0)
+            throw new IllegalArgumentException();
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
+
+}
+</code></pre>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+                <script>
+                    hljs.initHighlightingOnLoad();
+                </script>
             </div>
         </div>
 

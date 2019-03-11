@@ -143,11 +143,9 @@
                                     <p class="lead m-0 mt-1 text-center"><b>installment type</b></p>
                                 </div>
                                 <div class="col-md-2 m-0 p-0 border rounded-top rounded-bottom">
-                                    <form:select path="installmentType"
-                                                 class="form-control w-100 border-secondary border-0 text-center">
-                                        <option style="text-align-last:center;" value="equal">equal</option>
-                                        <option style="text-align-last:center;" value="decreasing">decreasing</option>
-                                    </form:select>
+                                    <form:input path="installmentType"
+                                                 class="form-control w-100 border-secondary border-0 text-center"/>
+
                                 </div>
                             </div>
                             <div class="row">
