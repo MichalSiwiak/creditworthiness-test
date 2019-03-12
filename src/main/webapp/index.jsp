@@ -112,22 +112,25 @@
                         <h5>The application calculates the creditworthiness of the client based on data:</h5>
                         <h5>
                             <ul>
-                                <li>payment period</li>
-                                <li>interest</li>
-                                <li>installment type</li>
-                                <li>credit limits</li>
-                                <li>other loans</li>
-                                <li>other liabilities</li>
-                                <li>monthly income</li>
-                                <li>number of dependents</li>
+                                <li>payment period,</li>
+                                <li>interest,</li>
+                                <li>installment type,</li>
+                                <li>credit limits,</li>
+                                <li>other loans,</li>
+                                <li>other liabilities,</li>
+                                <li>monthly income,</li>
+                                <li>number of dependents.</li>
                             </ul>
                         </h5>
                         <h5>The application calculates the maximum loan amount based on the above data and the maximum
-                            installment of the customer, using the annuity formula: <a href="https://en.wikipedia.org/wiki/Annuity" target="_blank">(source here from wiki)</a> </h5>
+                            installment of the customer, using the annuity formula <a
+                                    href="https://en.wikipedia.org/wiki/Annuity" target="_blank">(source here):</a></h5>
 
 
-                        <h5><img
-                                src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6d10492db486b9289df62d8cd7df6199a211dcaf">
+                        <h5>
+                            <center><img
+                                    src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6d10492db486b9289df62d8cd7df6199a211dcaf">
+                            </center>
                             <br><br>where
                             <br>
                             <br>R = installment payment
@@ -136,7 +139,7 @@
                             <br>n = number of installments
                         </h5>
 
-                        <h5>From the above formula we calculate K and a R value is treated as free funds that we can
+                        <h5>From the above formula we calculate K and R value is treated as free funds that we can
                             transfer to a loan (income minus all expenses).</h5>
 
                         <h5><b>Back End: </b>Java, Spring MVC.</h5>

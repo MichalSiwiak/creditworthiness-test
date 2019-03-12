@@ -109,7 +109,7 @@
                 <div class="row">
                     <div class="col-md-0">
                         <h1 class="text-left text-primary">Creditworthiness Test</h1>
-                        <p class="lead text-left">Creditworthiness test using the reverse PMT function</p>
+                        <p class="lead text-left">Creditworthiness test using the reverse PMT function.</p>
                     </div>
                 </div>
             </div>
